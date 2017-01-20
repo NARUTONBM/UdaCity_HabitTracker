@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">UdaCity_HabitTracker</string>
+    <string name="bt_clear">Clear</string>
+    <string name="bt_action">Start</string>
+    <string name="tv_result">No entries detected</string>
+    <string name="bt_stop">STOP</string>
+    <string name="bt_start">START</string>
 </resources>

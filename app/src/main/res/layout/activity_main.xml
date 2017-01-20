@@ -12,7 +12,46 @@
     tools:context="com.naruto.udacity_habittracker.MainActivity">
 
     <TextView
+        android:id="@+id/tv_title"
+        style="@style/Base.TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="@string/tv_result"/>
+
+    <TextView
+        android:id="@+id/tv_result"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_action"
+            style="@style/Base.TextAppearance.AppCompat.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bt_action"/>
+
+        <Button
+            android:id="@+id/bt_clear"
+            style="@style/Base.TextAppearance.AppCompat.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bt_clear"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_time_keeping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>
