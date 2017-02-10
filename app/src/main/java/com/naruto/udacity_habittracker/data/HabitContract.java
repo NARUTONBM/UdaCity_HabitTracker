@@ -12,13 +12,15 @@ import android.provider.BaseColumns;
 
 public class HabitContract {
 
+	/**
+	 * An empty private constructor makes sure that the class is not going to be
+	 * initialised.
+	 */
 	private HabitContract() {
-
 	}
 
 	public class HabitEntry implements BaseColumns {
 		public static final String TABLE_NAME = "walk_the_dog";
-		public static final String _ID = BaseColumns._ID;
 		public static final String COLUMN_DATE = "date";
 		public static final String COLUMN_START = "start";
 		public static final String COLUMN_END = "end";

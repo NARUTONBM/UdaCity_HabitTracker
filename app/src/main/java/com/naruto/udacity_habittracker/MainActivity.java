@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.naruto.udacity_habittracker.data.HabitContract;
 import com.naruto.udacity_habittracker.data.HabitDBHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			break;
 
 		case R.id.bt_clear:
-			deleteAll();
+			HabitDBHelper.deleteAll(mDBHelper);
 			updateUI();
 
 			break;
@@ -107,45 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	/**
-	 * 插入一条数据
-	 */
-	public void insert() {
-		Date rightNow = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm aaa");
-		long endTime = rightNow.getTime();
-		long difference = endTime - mStartTime;
-
-		// 以string类型将数据插入到数据库中
-		String currentDate = dateFormat.format(rightNow);
-		String startTimeString = timeFormat.format(mStartTime);
-		String endTimeString = timeFormat.format(endTime);
-		String durationString = (difference / 60000) + " min.";
-
-		// 清空当前values
-		mValues.clear();
-		// 往values中防止数据
-		mValues.put(HabitContract.HabitEntry.COLUMN_DATE, currentDate);
-		mValues.put(HabitContract.HabitEntry.COLUMN_START, startTimeString);
-		mValues.put(HabitContract.HabitEntry.COLUMN_END, endTimeString);
-		mValues.put(HabitContract.HabitEntry.COLUMN_DURATION, durationString);
-
-		// 获取数据库对象，执行插入操作
-		SQLiteDatabase db = mDBHelper.getWritableDatabase();
-		db.insert(HabitContract.HabitEntry.TABLE_NAME, null, mValues);
-	}
-
-	/**
-	 * 清除所有数据
-	 */
-	public void deleteAll() {
-		// 获取数据库对象
-		SQLiteDatabase db = mDBHelper.getWritableDatabase();
-		// 执行清除数据操作
-		db.delete(HabitContract.HabitEntry.TABLE_NAME, null, null);
-	}
-
 	private Cursor read() {
 		// 建立数据库连接
 		mDBHelper = new HabitDBHelper(this);
@@ -176,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 改变按钮文字
 			bt_action.setText(R.string.bt_start);
 			// 停止计时，网数据库中插入一条数据
-			insert();
+			HabitDBHelper.insert(mStartTime, mValues, mDBHelper);
 			// 隐藏进度条
 			pb_time_keeping.setVisibility(View.GONE);
 		}
